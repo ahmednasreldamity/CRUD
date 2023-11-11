@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameZone | @ViewData["Title"]</title>
+    @* Bootstrap File *@
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    @* Icon Link *@
+    <link rel ="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    @* Fonts *@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap">
+    @* Select2 css *@
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
+    @* Alert2 css *@
+    <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.min.css" />
+    @* CSS File *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/GameZone.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <a class="navbar-brand flex-grow-1 fw-bolder fs-4" style="color:#6520e0" asp-controller="Home" asp-action="Index">GameZone</a>
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <a class="navbar-brand fw-bolder" style="color:#1a0b35" asp-controller="Games" asp-action="Index">Games</a>
+                            <a class="navbar-brand fw-bolder" style="color:#1a0b35" asp-controller="account" asp-action="addadmin">Add Admin</a>
+                        }
+                    </div>
+                </div>
+               <div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        @if(User.Identity.IsAuthenticated == true)
+                        {
+                            <a class="navbar-brand fw-bolder" style="color:#1a0b35" asp-controller="home" asp-action="index">Welcome @User.Identity.Name</a>
+                            <a class="navbar-brand fw-bolder" style="color:#1a0b35" asp-controller="account" asp-action="logout">Logout</a>
+                        }
+                        else
+                        {
+                            <a class="navbar-brand fw-bolder" style="color:#1a0b35" asp-controller="account" asp-action="register">Register</a>
+                            <a class="navbar-brand fw-bolder" style="color:#1a0b35" asp-controller="account" asp-action="login">Login</a>
+                        }
+                    </div>
+               </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - GameZone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/select2/js/select2.min.js"></script>
+	<script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
